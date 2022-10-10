@@ -33,19 +33,21 @@ for(let link of menuLinks){
   topMenuEl.append(a)
 }
 
-const subMenuEl = document.getElementById("sub-menu")
-subMenuEl.style.height = "100%"
-subMenuEl.style.backgroundColor = "#3da4ab"
-subMenuEl.classList.add("flex-around")
-subMenuEl.style.position = "absolute"
-subMenuEl.style.position.top = "0"
+const subMenuEl = document.getElementById("sub-menu") // 4.0
+subMenuEl.style.height = "100%" // 4.1
+subMenuEl.style.backgroundColor = "#3da4ab" // 4.2
+subMenuEl.classList.add("flex-around") // 4.3
+subMenuEl.style.position = "absolute" // 4.4
+subMenuEl.style.position.top = "0" // 4.5
 
-const topMenuLinks = topMenuEl.querySelectorAll("a");
+const topMenuLinks = topMenuEl.querySelectorAll("a"); // 5.1
 let showingSubMenu = false;
 
 topMenuEl.addEventListener("click", function(event){
   event.preventDefault();
-  if(event.target.nodeName !== "a"){
+  console.dir(event.target)
+  if(event.target.nodeName !== "A"){
+    console.log(event.target.text)
     return;
   }  
 
@@ -60,8 +62,8 @@ topMenuEl.addEventListener("click", function(event){
     return // 5.3
   }
   
-  const navLinks = topMenuEl.querySelectorAll("a");
-
+  const navLinks = document.querySelectorAll("a");
+console.log(navLinks)
   for(let navLink of navLinks) {
     navLink.classList.remove("active"); // 5.4
   }
@@ -73,7 +75,7 @@ topMenuEl.addEventListener("click", function(event){
       }
     }
   };
-  event.target.className = "active";
+  event.target.className = "active"; // 5.5
   if(targetSubLink){ // 5.6
     showingSubMenu = true;
   } else {
