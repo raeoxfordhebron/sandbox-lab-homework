@@ -45,15 +45,16 @@ let showingSubMenu = false;
 
 topMenuEl.addEventListener("click", function(event){
   event.preventDefault();
-  console.dir(event.target)
   if(event.target.nodeName !== "A"){
     console.log(event.target.text)
     return;
   }  
-
-  if(event.target.innerHTML === "about"){
-    document.querySelector("h1").innerText = "<h1>about</h1>";
+console.log(event.target.innerText)
+  if(event.target.innerText === "ABOUT"){
+    console.dir(document.querySelector("h1"))
+    document.querySelector("main").innerHTML = ("<h1>about</h1>");
   }
+  
 
   if(event.target.className === "active"){ //started experimenting at 5.2
     event.target.classList.remove("active")
@@ -63,7 +64,6 @@ topMenuEl.addEventListener("click", function(event){
   }
   
   const navLinks = document.querySelectorAll("a");
-console.log(navLinks)
   for(let navLink of navLinks) {
     navLink.classList.remove("active"); // 5.4
   }
@@ -81,13 +81,13 @@ console.log(navLinks)
   } else {
     showingSubMenu = false;
   }
-  if(showingSubMenu){
+  console.log(event.target)
+  if(showingSubMenu && event.target.text !== "about"){
     buildSubMenu(targetSubLink()); // 5.7
     subMenuEl.style.top = "100%";
   } else {
     subMenuEl.style.top = "0";
   }
-
 })
 
 function buildSubMenu(subLinks){
@@ -102,16 +102,17 @@ function buildSubMenu(subLinks){
 
 subMenuEl.addEventListener("click", function(event) { // 6.0
   event.preventDefault(); 
-  if(event.target.nodeName !== "a"){
+  if(event.target.nodeName !== "A"){
+    console.log(event.target)
     return;
   }
-  showingSubMenu = false;
+  showingSubMenu = false; // 6.1
   subMenuEl.style.top = "0";
 
-  const navLinks = topMenuEl.querySelectorAll("a");
+  const navLinks = topMenuEl.querySelectorAll("a"); // 6.2
   for (let navLink of navLinks) {
     navLink.classList.remove("active");
   }
 
-  document.querySelector("h1").innerHTML = `${event.target.text}`
+  document.querySelector("h1").innerHTML = `${event.target.text}` // 6.3
 })
